@@ -1,0 +1,316 @@
+/* @import url("https://fonts.googleapis.com/css?family=Varela+Round"); */
+@charset "utf-8";
+/* CSS Document */
+
+@font-face {
+  font-family: "test";
+  src: url("/fonts/BYekan.ttf");
+  font-weight: normal;
+  font-style: normal;
+  font-display: auto;
+}
+
+html,
+body {
+  overflow-x: hidden;
+  height: 100%;
+  background: rgb(233, 233, 233);
+  padding: 0;
+  margin: 0;
+  font-family: test;
+}
+
+* {
+  box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  -o-box-sizing: border-box;
+}
+
+.header {
+  display: block;
+  margin: 0 auto;
+  width: 100%;
+  max-width: 100%;
+  box-shadow: none;
+  background-color: #ffffff;
+  box-shadow: 0 4px 8px 0 rgba(145, 145, 145, 0.2),
+    0 6px 20px 0 rgba(167, 166, 166, 0.19);
+  height: 70px !important;
+  overflow: hidden;
+  z-index: 10;
+  float: right;
+  position: fixed;
+}
+
+.pic {
+  margin: -15px 20px 0px 20px;
+}
+
+.pic_side {
+  align-items: center;
+  margin-right: 50px;
+}
+
+/*---------------- menu top ------------------ */
+
+.header .top_menu .right_top ul li {
+  padding: 2px 29px 0 5px;
+  /* margin: 0px 0px 0px 10px ; */
+  float: right;
+  display: block;
+}
+
+.right_top ul li a {
+  /* margin: 1px 8px; */
+  float: right;
+  display: block;
+  color: #585858;
+  font-size: 28px;
+  text-align: center;
+  text-decoration: none;
+}
+
+.right_top ul li a .icon :hover {
+  margin: 0px 5px;
+  font-size: 30px;
+  float: right;
+  font-family: test;
+  color: #0043c0;
+  text-decoration: none;
+  text-align: center;
+  box-shadow: 0 0 0 5px #f1f1f1;
+  border-radius: 16px;
+  background-color: #f0f0f0;
+
+  /* display: block; */
+  /* display: block; */
+  /* box-shadow: 0 0 0 5px #f1f1f1; */
+  /* border-radius: 16px; */
+  /* background-color: #f0f0f0; */
+}
+
+/* b{
+  padding: 0px 0px 0px 10px;
+  font-size: 20px;
+  z-index: 80;
+  top:1;
+  position: absolute;
+  color: #6b6b6b;
+  position: fixed; 
+  background-color: #585858;
+   display: none;
+} */
+
+/* .hide {
+  padding: 3px 8px 3px 8px;
+  position: fixed;
+  font-size: 20px;
+  border-radius: 8px;
+  background-color: rgba(27, 31, 35, 0.04) 0 1px 0;
+  display: none;
+  box-shadow: 0 0 0 5px #757575;
+  background-color: #757575;
+  color: #f1ecec;
+  position: fixed;
+} */
+
+.header .top_menu .left_top ul li {
+  float: left;
+  margin: 5px 25px 5px 5px;
+  list-style-type: none;
+  border: none;
+}
+
+.info {
+  margin: -1px 0px 0px -30px;
+  text-align: center;
+  font-size: 18px;
+}
+
+.button {
+  appearance: none;
+  height: 30px;
+  background-color: #fafbfc;
+  border: 1px solid rgba(27, 31, 35, 0.15);
+  border-radius: 6px;
+  box-shadow: rgba(27, 31, 35, 0.04) 0 1px 0,
+    rgba(255, 255, 255, 0.25) 0 1px 0 inset;
+  box-sizing: border-box;
+  color: #24292e;
+  cursor: pointer;
+  display: inline-block;
+  font-family: test;
+  font-size: 14px;
+  font-weight: 500;
+  position: relative;
+  vertical-align: middle;
+  text-align: center;
+  margin-left: 10px;
+}
+
+.button:hover {
+  appearance: none;
+  height: 30px;
+  background-color: #1a4672bd;
+  border: 1px solid rgba(27, 31, 35, 0.15);
+  border-radius: 6px;
+  box-shadow: rgba(27, 31, 35, 0.04) 0 1px 0,
+    rgba(255, 255, 255, 0.25) 0 1px 0 inset;
+  box-sizing: border-box;
+  color: #ffffff;
+  cursor: pointer;
+  display: inline-block;
+  font-family: test;
+  font-size: 14px;
+  font-weight: 500;
+  position: relative;
+  vertical-align: middle;
+  text-align: center;
+  margin-left: 10px;
+}
+
+/*----------------  main ------------------ */
+.main {
+  margin: 0 auto;
+  display: block;
+  height: 100%;
+  margin-top: 60px;
+}
+.mainInner {
+  display: table;
+  height: 100%;
+  width: 100%;
+  text-align: center;
+}
+.mainInner div {
+  display: table-cell;
+  vertical-align: middle;
+  font-size: 3em;
+  font-weight: bold;
+  letter-spacing: 1.25px;
+}
+
+/*---------------- menu side ------------------ */
+
+#sidebarMenu {
+  height: 100%;
+  position: fixed;
+  right: 0;
+  width: 250px;
+  margin-top: 60px;
+  transform: translateX(+250px);
+  transition: transform 250ms ease-in-out;
+  /*background: linear-gradient(180deg, #262761 0%, #3f5efb 100%);*/
+  background: rgb(26, 36, 58) !important;
+  box-shadow: 6px 14px 8px 6px rgba(46, 46, 46, 0.2);
+}
+.sidebarMenuInner {
+  margin: 0;
+  padding: 0;
+  border-top: 1px solid rgba(248, 248, 248, 0.733);
+}
+.sidebarMenuInner li {
+  list-style: none;
+  color: rgb(218, 218, 218);
+  font-weight: bold;
+  padding: 25px;
+  cursor: pointer;
+  border-bottom: 1px solid rgba(141, 141, 141, 0.247);
+}
+.sidebarMenuInner span {
+  display: block;
+  font-size: 20px;
+  text-align: center;
+  color: rgba(204, 204, 204, 0.767);
+}
+.sidebarMenuInner li a {
+  color: rgb(207, 207, 207);
+  font-weight: bold;
+  cursor: pointer;
+  text-decoration: none;
+}
+
+.sidebarMenuInner li a:hover {
+  text-shadow: 0px 0px 4px #000000;
+  font-size: 20px;
+}
+
+/*---------------- label icon ------------------ */
+
+input[type="checkbox"]:checked ~ #sidebarMenu {
+  transform: translatex(0);
+}
+
+input[type="checkbox"] {
+  transition: all 0.3s;
+  box-sizing: border-box;
+  display: none;
+}
+.sidebarIconToggle {
+  transition: all 0.3s;
+  box-sizing: border-box;
+  cursor: pointer;
+  position: absolute;
+  z-index: 99;
+  height: 100%;
+  width: 100%;
+  top: 22px;
+  right: 25px;
+  height: 24px;
+  width: 24px;
+}
+.spinner {
+  transition: all 0.3s;
+  box-sizing: border-box;
+  position: absolute;
+  height: 4px;
+  width: 100%;
+  background-color: rgb(131, 125, 125);
+}
+
+/*---------------- label ------------------ */
+
+label:hover {
+  box-shadow: 0 0 0 7px #f1ecec;
+  border-radius: 10px;
+  background-color: #f1ecec;
+}
+
+.horizontal {
+  transition: all 0.3s;
+  box-sizing: border-box;
+  position: relative;
+  float: left;
+  margin-top: 3px;
+}
+.diagonal.part-1 {
+  position: relative;
+  transition: all 0.3s;
+  box-sizing: border-box;
+  float: left;
+}
+.diagonal.part-2 {
+  transition: all 0.3s;
+  box-sizing: border-box;
+  position: relative;
+  float: left;
+  margin-top: 3px;
+}
+input[type="checkbox"]:checked ~ .sidebarIconToggle > .horizontal {
+  transition: all 0.3s;
+  box-sizing: border-box;
+  opacity: 0;
+}
+input[type="checkbox"]:checked ~ .sidebarIconToggle > .diagonal.part-1 {
+  transition: all 0.3s;
+  box-sizing: border-box;
+  transform: rotate(135deg);
+  margin-top: 8px;
+}
+input[type="checkbox"]:checked ~ .sidebarIconToggle > .diagonal.part-2 {
+  transition: all 0.3s;
+  box-sizing: border-box;
+  transform: rotate(-135deg);
+  margin-top: -9px;
+}
