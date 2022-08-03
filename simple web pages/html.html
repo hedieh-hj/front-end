@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html>
+
+<head lang="fa">
+    <meta charset="utf-8" dir="rtl">
+    <title>test</title>
+    <link href="style.css" rel="stylesheet" type="text/css">
+</head>
+
+<body>
+    <!----------- start top menu ------------>
+
+    <div class="top_menu">
+
+        <div class="right_top" id="header_side_right">
+            <span style="font-size:30px;cursor:pointer" onclick="openNav()">☰ </span>
+
+
+            <a href="html.html" target="_blank">
+                <div class="icon" id="icon_d">
+                    <ion-icon name="home-outline"></ion-icon>
+                </div>
+            </a>
+
+            <a href="persian_calender.html" target="_blank">
+                <div class="icon" id="icon_d">
+                    <ion-icon name="calendar-outline"></ion-icon>
+                </div>
+
+                <a href="#" target="_blank" onclick="openFullscreen();">
+                    <div class="icon" id="icon_d">
+                        <ion-icon name="expand-outline"></ion-icon>
+                    </div>
+
+                    <a href="#" target="_blank" onclick="closeFullscreen();">
+                        <div class="icon_exit" id="icon_d">
+                            <ion-icon name="exit-outline"></ion-icon>
+                        </div>
+        </div>
+
+
+        <div class="left_top">
+            <div class="pic_left_top">
+                <div class="dropdown">
+                    <button class="dropbtn"><img src="image/user-img.jpg" alt="" width="70" height="70"></button>
+                    <div class="dropdown-content"><a href="#" style="text-align: center;"> my profile</a>
+                        <a href="login.html" style="text-align: center;">
+                            <ion-icon name="exit-outline"></ion-icon> log out
+                        </a>
+                    </div>
+                </div>
+
+
+            </div>
+            <span id="demo"></span>
+
+        </div>
+
+
+    </div>
+
+
+
+    <!----------- start side menu ------------>
+
+    <div id="mySidenav" class="sidenav">
+        <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">×</a>
+        <ul class="sidebarMenuInner">
+            <li>
+                <div class="pic_side"><a href="#"><img src="image/user-img.jpg" alt="" width="100" height="100"></div>
+                <span>نام و نام خانوادگی </span>
+                <span>ادمین</span>
+            </li>
+            <li><a href="#" target="_blank">نمایش فیش های حقوقی</a></li>
+            <li><a href="#" target="_blank">لیست کاربران</a></li>
+            <li><a href="#" target="_blank">ایجاد کاربر جدید</a></li>
+            <li><a href="#" target="_blank">ویرایش اطلاعات</a></li>
+        </ul>
+    </div>
+
+
+
+    <!----------- main ------------>
+
+    <div id="main">
+
+        <br>
+        <h2 style="text-align:center ; font-weight: bold;">فیش حقوقی
+            <div class="print">
+
+                <a>
+                    <ion-icon name="arrow-back-outline"></ion-icon>
+                </a>
+
+                <a>
+                    <ion-icon name="download-outline" download></ion-icon>
+                </a>
+                <a>
+                    <ion-icon name="print-outline" onclick="window.print()"></ion-icon>
+                </a>
+
+            </div>
+
+        </h2>
+        <hr>
+        <br>
+        <div class="tables">
+            <table class="table1" style="width: 25%">
+                <th colspan="2"> اطلاعات شخص</th>
+                <tr>
+                    <td style="width: 8%"> نام :</td>
+                    <td colspan="2"> تست </td>
+                </tr>
+                <tr>
+                    <td style="width: 8%">نام خانوادگی : </td>
+                    <td colspan="2"> تست</td>
+                </tr>
+                <tr>
+                    <td style="width: 8%">کد ملی : </td>
+                    <td style="width: 15%"> تست </td>
+                </tr>
+                <tr>
+                    <td style="width: 8%">محل خدمت :</td>
+                    <td style="width: 15%"> تست </td>
+                </tr>
+                <tr>
+                    <td style="width: 8%">سمت :</td>
+                    <td style="width: 15%"> تست </td>
+                </tr>
+                <tr>
+                    <td style="width: 8% ; background-color: #d1dbee">قابل پرداخت :</td>
+                    <td style="width: 15% ; background-color: #d1dbee"></td>
+                </tr>
+
+            </table>
+
+
+            <table class="table2" style="width: 73%">
+                <tr>
+                    <th style="width: 17%">حقوق مزایا</th>
+                    <th style="width: 10%">مقدار</th>
+                    <th style="width: 15%">مبلغ حقوق و مزایا</th>
+                    <th style="width: 18%">شرح کسور</th>
+                    <th style="width: 11%">مقدار</th>
+                    <th style="width: 15%">مبلغ کسور</th>
+                    <th style="width: 15%">جمع کسور/ مانده</th>
+                </tr>
+                <tr>
+                    <td>test</td>
+                    <td>50</td>
+                    <td>50</td>
+                    <td>dfsdf</td>
+                    <td>50</td>
+                    <td>50</td>
+                    <td>50</td>
+                </tr>
+                <tr>
+                    <td>test</td>
+                    <td>50</td>
+                    <td>50</td>
+                    <td>dfsdf</td>
+                    <td>50</td>
+                    <td>50</td>
+                    <td>50</td>
+                </tr>
+                <tr>
+                    <td style="background-color: #d1dbee;">جمع حقوق:</td>
+                    <td colspan="2" style="background-color: #d1dbee;"></td>
+                </tr>
+                <tr>
+                    <td style="background-color: #d1dbee;">جمع کسور:</td>
+                    <td colspan="2" style="background-color: #d1dbee;"></td>
+                </tr>
+
+            </table>
+
+            <br>
+
+            <table class="table3" style="width: 73%">
+                <tr class="firsttr">
+                    <th>توضیحات</th>
+                </tr>
+                <td style="width: 73%">
+                    <textarea style="width: 98%; height:100px ; float: left;" name="comment"
+                        placeholder="توضیحات ..."></textarea>
+                </td>
+
+                </tr>
+
+            </table>
+        </div>
+    </div>
+
+
+
+
+    <!----------- script ------------>
+    <script>
+        function openNav() {
+            document.getElementById("mySidenav").style.width = "270px";
+            document.getElementById("main").style.marginRight = "270px";
+            document.getElementById("header_side_right").style.marginRight = "270px";
+        }
+
+        function closeNav() {
+            document.getElementById("mySidenav").style.width = "0";
+            document.getElementById("main").style.marginRight = "0";
+            document.getElementById("header_side_right").style.marginRight = "0";
+        }
+    </script>
+
+    <script>
+        var elem = document.documentElement;
+        function openFullscreen() {
+            if (elem.requestFullscreen) {
+                elem.requestFullscreen();
+            } else if (elem.webkitRequestFullscreen) { /* Safari */
+                elem.webkitRequestFullscreen();
+            } else if (elem.msRequestFullscreen) { /* IE11 */
+                elem.msRequestFullscreen();
+            }
+        }
+
+        function closeFullscreen() {
+            if (document.exitFullscreen) {
+                document.exitFullscreen();
+            } else if (document.webkitExitFullscreen) { /* Safari */
+                document.webkitExitFullscreen();
+            } else if (document.msExitFullscreen) { /* IE11 */
+                document.msExitFullscreen();
+            }
+        }
+    </script>
+
+    <!-- <script>
+    var dt = new Date();
+    document.getElementById('date-time').innerHTML=dt;
+    </script> -->
+
+    <!-- date -->
+    <script src="/js/date.js"></script>
+
+
+    <script src="https://unpkg.com/ionicons@5.0.0/dist/ionicons.js"></script>
+</body>
+
+</html>
