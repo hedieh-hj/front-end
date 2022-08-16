@@ -301,12 +301,11 @@ body::-webkit-scrollbar {
 
 /* style calender */
 
-.mainb {
+ .mainb {
   text-align: center;
   align-items: center;
   /* margin-right: 700px; */
-  width: 10px;
-}
+} 
 
 .container {
   margin: 0 auto;

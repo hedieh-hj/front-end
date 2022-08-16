@@ -34,6 +34,15 @@ body::-webkit-scrollbar {
   }
 }
 
+@media screen and (max-height: 450px) {
+  #main {
+    margin-right: 100px;
+  }
+  .container {
+    margin-right: 00px;
+  }
+}
+
 :fullscreen .icon_exit {
   display: inline;
 }
@@ -215,17 +224,21 @@ body::-webkit-scrollbar {
   transition: margin-left 0.5s;
 }
 
-.pic_left_top a {
-  padding: 0px 15px;
-  text-decoration: none;
+.pic_left_top img {
+  float: left;
+  padding: 5px 30px 0 45px;
 }
 
-.left_top span {
-  margin: -55px 0px 0px 120px;
-  direction: rtl;
-  text-align: center;
-  float: left;
+.pic_left_top span {
+  float: right;
+  padding: 25px 5px 0 10px;
   font-size: 20px;
+  font-family: test;
+}
+
+.pic_left_top a {
+  /* padding: 0px 0px 0px 20px; */
+  /* text-decoration: none; */
 }
 
 .dropbtn {
@@ -234,12 +247,13 @@ body::-webkit-scrollbar {
   padding: 1px;
   font-size: 16px;
   border: none;
-  margin-left: -50px;
+  margin-left: 0px;
   float: left;
 }
 
 .dropdown {
-  position: relative;
+  padding: 0 0px 0 0px;
+  /* position: relative; */
   display: inline-block;
   /* float: left; */
   /* height: 50px;
@@ -253,9 +267,9 @@ body::-webkit-scrollbar {
   background-color: #fafafa;
   min-width: 130px;
   float: left;
-  margin: 70px 0px 10px 10px;
+  margin: 70px 0px 70px 10px;
   box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
-  z-index: 16;
+  z-index: 25;
   vertical-align: middle;
 }
 
@@ -288,6 +302,22 @@ body::-webkit-scrollbar {
 
 .dropdown:hover .dropbtn {
   background-color: #d6d6d623;
+}
+
+.clearfix,
+.clearfix::before,
+.clearfix::after {
+  clear: both;
+  content: "";
+  display: black;
+}
+
+.dynamic-element {
+  display: none;
+}
+
+.active-element {
+  display: block;
 }
 
 /* --------------- tabel ------------ */
@@ -369,16 +399,16 @@ h2 .print a {
 
 h2 .print a:hover {
   float: left;
-  width: 50px;
-  height: 50px;
-  margin: -20px 5px;
+  width: 40px;
+  height: 40px;
+  /* margin: -10px -10px; */
   font-size: 28px;
   font-family: test;
   color: #0043c0;
   text-decoration: none;
   text-align: center;
-  box-shadow: 0 -7px 0 2px #f1f1f1;
-  border-radius: 16px;
+  /* box-shadow: 2px 5px 2px 5px #f1f1f1; */
+  border-radius: 20px;
   background-color: #f0f0f0;
   cursor: pointer;
 }
