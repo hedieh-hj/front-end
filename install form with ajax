@@ -1,0 +1,483 @@
+@model InstallModel
+
+<div class="container">
+    <div class="form-group row">
+        <div class="col-md-6 offset-md-3">
+            <div class="form-check">
+                <input class="form-check-input" asp-for="InstallOrash" asp-value="@false" />
+                <label class="form-check-label" for="@Html.IdFor(m => m.InstallOrash)">
+                    @ILS.GetResource("TransferFromOrash")
+                </label>
+            </div>
+        </div>
+    </div>
+    <div id="orashInstallationOptions" style="display: none;">
+        <div class="form-group row">
+            <label class="col-sm-4 col-form-label text-right font-weight-bold">
+                @ILS.GetResource("OrashAutomationApiURL")
+            </label>
+            <div class="col-sm-8">
+                <div class="input-group">
+                    <input asp-for="OrashAutomationApiURL" class="form-control" aria-describedby="btn_InstallOrashAutomation" />
+                    <button class="btn btn-outline-secondary" type="button" id="btn_InstallOrashAutomation">
+                        <span>تست ارتباط</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+        <div class="form-group row">
+            <label class="col-sm-4 col-form-label text-right font-weight-bold">
+                @ILS.GetResource("OrashSourceCompany")
+            </label>
+            <div class="col-sm-8">
+                <select asp-for="SelectedCompany" class="form-control" disabled></select>
+            </div>
+        </div>
+        <div class="form-group row">
+            <label class="col-sm-4 col-form-label text-right font-weight-bold">
+                @ILS.GetResource("TransferFeeLevel")
+            </label>
+            <div class="col-sm-8">
+                <select asp-for="SelectedOrashProductFeeLevel" asp-items="Model.OrashProductFeeLevels" class="form-control" disabled></select>
+            </div>
+        </div>
+        <div class="form-group row">
+            <label class="col-sm-4 col-form-label text-right font-weight-bold">
+                @ILS.GetResource("OrashStorages")
+            </label>
+            <div class="col-sm-8">
+                <select asp-for="SelectedStorage" asp-items="Model.OrashStorages" class="form-control" disabled></select>
+            </div>
+        </div>
+
+        @*//////////////////////////////////////////from to *@
+        <div class="form-group row">
+            <input class="form-check-input" asp-for="InstallProductCategories" value="InstallProductCategories" disabled />
+            <label class="col-sm-4 from-check-label" for="@Html.IdFor(m => m.InstallProductCategories)">
+                @ILS.GetResource("Category")
+            </label>
+            <label class="col-sm-1">@ILS.GetResource("From")</label>
+            <div class="col-sm-3">
+                <select asp-for="SelectedCategoryFrom" asp-items="Model.OrashCategoryFrom" class="form-control" disabled></select>
+            </div>
+            <label class="col-sm-1">@ILS.GetResource("To")</label>
+            <div class="col-sm-3">
+                <select asp-for="SelectedCategoryTo" asp-items="Model.OrashCategoryTo" class="form-control" disabled></select>
+            </div>
+        </div>
+
+        <div class="form-group row">
+            <input class="form-check-input" asp-for="InstallProductMainGroups" disabled />
+            <label class="col-sm-4 from-check-label" for="@Html.IdFor(m => m.InstallProductMainGroups)">
+                @ILS.GetResource("MainGroup")
+            </label>
+            <label class="col-sm-1">@ILS.GetResource("From")</label>
+            <div class="col-sm-3">
+                <select asp-for="SelectedMainGroupFrom" asp-items="Model.OrashMainGroupsFrom" class="form-control" disabled></select>
+            </div>
+            <label class="col-sm-1">@ILS.GetResource("To")</label>
+            <div class="col-sm-3">
+                <select asp-for="SelectedMainGroupTo" asp-items="Model.OrashMainGroupsTo" class="form-control" disabled></select>
+            </div>
+        </div>
+
+        <div class="form-group row">
+            <input class="form-check-input" asp-for="InstallProductSubGroups" disabled />
+            <label class="col-sm-4 form-check-label" for="@Html.IdFor(m => m.InstallProductSubGroups)">
+                @ILS.GetResource("SubGroup")
+            </label>
+            <label class="col-sm-1">@ILS.GetResource("From")</label>
+            <div class="col-sm-3">
+                <select asp-for="SelectedSubGroupFrom" asp-items="Model.OrashSubGroupsFrom" class="form-control" disabled></select>
+            </div>
+            <label class="col-sm-1">@ILS.GetResource("To")</label>
+            <div class="col-sm-3">
+                <select asp-for="SelectedSubGroupTo" asp-items="Model.OrashSubGroupsTo" class="form-control" disabled></select>
+            </div>
+        </div>
+
+        <div class="form-group row">
+            <input class="form-check-input" asp-for="InstallProducts" disabled />
+            <label class="col-sm-4 form-check-label" for="@Html.IdFor(m => m.InstallProducts)">
+                @ILS.GetResource("OrashProductCode")
+            </label>
+            <label class="col-sm-1">@ILS.GetResource("From")</label>
+            <div class="col-sm-3">
+                <select asp-for="SelectedProductCodeFrom" asp-items="Model.ProductCodeFrom" class="form-control" disabled></select>
+            </div>
+            <label class="col-sm-1">@ILS.GetResource("To")</label>
+            <div class="col-sm-3">
+                <select asp-for="SelectedProductCodeTo" asp-items="Model.ProductCodeTo" class="form-control" disabled></select>
+            </div>
+        </div>
+
+        @*check box*@
+        <div class="row">
+            <div class="col-md-4">
+                <div class="form-group">
+                    <div class="form-check">
+                        <input class="form-check-input" asp-for="InstallProductProperties" disabled />
+                        <label class="form-check-label" for="@Html.IdFor(m => m.InstallProductProperties)">
+                            @ILS.GetResource("TransferProductProperties")
+                        </label>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="form-group">
+                    <div class="form-check">
+                        <input class="form-check-input" asp-for="UseOrashProductFee" disabled />
+                        <label class="form-check-label" for="@Html.IdFor(m => m.UseOrashProductFee)">
+                            @ILS.GetResource("TransferProductFees")
+                        </label>
+                    </div>
+                </div>
+            </div>
+        </div>
+        @*check box*@
+
+    </div>
+</div>
+
+<script type="text/javascript">
+
+
+    $(document).ready(function () {
+        let orash_api_url = '';
+
+        $("#@Html.IdFor(x => x.InstallOrash)").on('click', function (e) {
+            if ($(this).is(":checked")) {
+                $('#orashInstallationOptions').show(200);
+            }
+            else {
+                $('#orashInstallationOptions').hide(200);
+            }
+        });
+
+        $('#btn_InstallOrashAutomation').on('click', function (e) {
+            orash_api_url = $("#@Html.IdFor(x => x.OrashAutomationApiURL)").val();
+
+            $.ajax({
+                method: 'POST',
+                url: `${orash_api_url}/api/v2/install`
+            }).done(function (data) {
+                if (data['hasError']) {
+                    //
+                }
+                else {
+                    $("#@Html.IdFor(x => x.SelectedCompany)").empty();
+
+                    data['content'].forEach(function (item, index) {
+                        var o = new Option(item['companyName'], item['id']);
+                        $("#@Html.IdFor(x => x.SelectedCompany)").append(o);
+                    });
+
+                    $("#@Html.IdFor(x => x.SelectedCompany)").prop('disabled', false);
+                    $("#@Html.IdFor(x => x.SelectedOrashProductFeeLevel)").prop('disabled', false);
+                    //$("#@Html.IdFor(x => x.SelectedStorage)").prop('disabled', false);
+                }
+            }).fail(function (errorThrown) {
+                //
+            });
+        });
+
+        $("#@Html.IdFor(x => x.SelectedCompany)").on('change', function (e) {
+            const company_id = e['target']['value'];
+
+            $.ajax({
+                method: 'GET',
+                url: `${orash_api_url}/api/v2/store/storage/${company_id}`
+            }).done(function (data) {
+                if (data['hasError']) {
+                    //
+                }
+                else {
+                    $("#@Html.IdFor(x => x.SelectedStorage)").empty();
+                    data['content'].forEach(function (item, index) {
+                        var o = new Option(item['caption'], item['code']);
+                        $("#@Html.IdFor(x => x.SelectedStorage)").append(o);
+                    });
+
+                    $("#@Html.IdFor(x => x.SelectedStorage)").prop('disabled', false);
+                    $("#@Html.IdFor(x => x.InstallProductCategories)").prop('disabled', false);
+                    $("#@Html.IdFor(x => x.InstallProductMainGroups)").prop('disabled', false);
+                    $("#@Html.IdFor(x => x.InstallProductProperties)").prop('disabled', false);
+                    $("#@Html.IdFor(x => x.InstallProducts)").prop('disabled', false);
+                    $("#@Html.IdFor(x => x.UseOrashProductFee)").prop('disabled', false);
+
+                    $("#InstallProductSubGroups").prop('checked', false);
+                    $("#InstallProductMainGroups").prop('checked', false);
+                    $("#InstallProductCategories").prop('checked', false);
+                    $("#InstallProducts").prop('checked', false);
+
+                    $("#SelectedCategoryFrom").prop('disabled', true);
+                    $("#SelectedCategoryTo").prop('disabled', true);
+                    $("#SelectedMainGroupFrom").prop('disabled', true);
+                    $("#SelectedMainGroupTo").prop('disabled', true);
+                    $("#SelectedSubGroupFrom").prop('disabled', true);
+                    $("#SelectedSubGroupTo").prop('disabled', true);
+                    $("#SelectedProductCodeFrom").prop('disabled', true);
+                    $("#SelectedProductCodeTo").prop('disabled', true);
+
+                    $("#SelectedCategoryFrom").empty();
+                    $("#SelectedCategoryTo").empty();
+                    $("#SelectedMainGroupFrom").empty();
+                    $("#SelectedMainGroupTo").empty();
+                    $("#SelectedSubGroupFrom").empty();
+                    $("#SelectedSubGroupTo").empty();
+                    $("#SelectedProductCodeFrom").empty();
+                    $("#SelectedProductCodeTo").empty();
+                }
+            }).fail(function (errorThrown) {
+                //
+            });
+            /////////////////////////////////////////////////////////////////////////////
+            //change storage --> products changed
+            $("#SelectedStorage").on('change', function (e) {
+                $("#InstallProducts").prop('checked', false);
+                $("#SelectedProductCodeFrom").prop('disabled', true);
+                $("#SelectedProductCodeTo").prop('disabled', true);
+                $("#SelectedProductCodeFrom").empty();
+                $("#SelectedProductCodeTo").empty();
+            });
+
+            /////////////////////////////////////////////////////////////////////////////
+            //1.checkbox category
+            $("#@Html.IdFor(x => x.InstallProductCategories)").on('click', function (e) {
+                if ($(this).is(":checked")) {
+                    $("#@Html.IdFor(x => x.SelectedCategoryFrom)").prop('disabled', false);
+                    $("#@Html.IdFor(x => x.SelectedCategoryTo)").prop('disabled', false);
+
+                    $.ajax({
+                        method: 'GET',
+                        url: `${orash_api_url}/api/v2/store/productcategory/${company_id}`
+                    }).done(function (data) {
+                        if (data['hasError']) { }
+                        else {
+                            $("#@Html.IdFor(x => x.SelectedCategoryFrom)").empty();
+                            $("#@Html.IdFor(x => x.SelectedCategoryTo)").empty();
+
+                            data['content'].forEach(function (item, index) {
+                                var o = new Option(item['caption'], item['code']);
+                                $("#@Html.IdFor(x => x.SelectedCategoryFrom)").append(o);
+                            });
+
+                            data['content'].forEach(function (item, index) {
+                                var o = new Option(item['caption'], item['code']);
+                                $("#@Html.IdFor(x => x.SelectedCategoryTo)").append(o);
+                            });
+                        }
+                    }).fail(function (errorThrown) {
+                        //--
+                    });
+                }
+                else {
+
+                    $("#SelectedCategoryFrom").empty();
+                    $("#SelectedCategoryTo").empty();
+                    $("#@Html.IdFor(x => x.SelectedCategoryFrom)").prop('disabled', true);
+                    $("#@Html.IdFor(X => X.SelectedCategoryTo)").prop('disabled', true);
+                }
+            });
+            //////////////////////////////////////////////////////////////////////////////////////
+            //2.checkbox maingroup
+            $("#@Html.IdFor(x => x.InstallProductMainGroups)").on('click', function (e) {
+                if ($(this).is(":checked")) {
+                    $("#@Html.IdFor(x => x.InstallProductSubGroups)").prop('disabled', false);
+                    $("#@Html.IdFor(x => x.SelectedMainGroupFrom)").prop('disabled', false);
+                    $("#@Html.IdFor(x => x.SelectedMainGroupTo)").prop('disabled', false);
+                    $("#InstallProductSubGroups").prop('checked', false);
+
+                    //ajax
+                    var GetMainGroupData = {
+                        "uniqueID": `${company_id}`
+                    }
+
+                    $.ajax({
+                        method: 'POST',
+                        data: JSON.stringify(GetMainGroupData),
+                        contentType: 'application/json; charset=UTF-8',
+                        url: `${orash_api_url}/api/v2/store/ProductmainGroup`
+
+                    }).done(function (data) {
+                        if (data['hasError']) { }
+                        else {
+                            $("#@Html.IdFor(x => x.SelectedMainGroupFrom)").empty();
+                            $("#@Html.IdFor(x => x.SelectedMainGroupTo)").empty();
+
+                            data['content'].forEach(function (item, index) {
+                                var o = new Option(item['caption'], item['code']);
+                                $("#@Html.IdFor(x => x.SelectedMainGroupFrom)").append(o);
+                            });
+
+                            data['content'].forEach(function (item, index) {
+                                var o = new Option(item['caption'], item['code']);
+                                $("#@Html.IdFor(x => x.SelectedMainGroupTo)").append(o);
+                            });
+                        }
+                    }).fail(function (errorThrown) {
+                        //--
+                    });
+                }
+                else {
+                    $("#SelectedMainGroupFrom").empty();
+                    $("#SelectedMainGroupTo").empty();
+                    $("#SelectedSubGroupFrom").empty();
+                    $("#SelectedSubGroupTo").empty();
+                    $("#InstallProductSubGroups").prop('checked', false);
+                    $("#@Html.IdFor(x => x.InstallProductSubGroups)").prop('disabled', true);
+                    $("#@Html.IdFor(x => x.SelectedMainGroupFrom)").prop('disabled', true);
+                    $("#@Html.IdFor(X => X.SelectedMainGroupTo)").prop('disabled', true);
+                    $("#@Html.IdFor(x => x.SelectedSubGroupFrom)").prop('disabled', true);
+                    $("#@Html.IdFor(X => X.SelectedSubGroupTo)").prop('disabled', true);
+                }
+            });
+
+            /////////////////////////////////////////////////////////////////////////////////////////
+            //3.checkbox subgroup
+            $("#@Html.IdFor(x => x.InstallProductSubGroups)").on('change', function (e) {
+                if ($(this).is(":checked")) {
+
+                    var maingroupFrom = parseInt($("#SelectedMainGroupFrom").val());
+                    var maingroupTo = parseInt($("#SelectedMainGroupTo").val());
+
+                    if (maingroupFrom > maingroupTo) {
+                        var maingroupTo = $("#SelectedMainGroupFrom").val();
+                        var maingroupFrom = $("#SelectedMainGroupTo").val();
+                    }
+
+                    //check if maingroup selected can select a subgroup
+                    if ((maingroupFrom != null) && (maingroupTo != null)) {
+
+                        $("#@Html.IdFor(x => x.SelectedSubGroupFrom)").prop('disabled', false);
+                        $("#@Html.IdFor(x => x.SelectedSubGroupTo)").prop('disabled', false);
+
+                        //ajax
+                        var GetSubGroupData = {
+                            "uniqueID": `${company_id}`,
+                            "data": {
+                                "frommaingroupcode": `${maingroupFrom}`,
+                                "tomaingroupcode": `${maingroupTo}`
+                            }
+                        }
+
+                        $.ajax({
+                            method: 'POST',
+                            data: JSON.stringify(GetSubGroupData),
+                            contentType: 'application/json; charset=UTF-8',
+                            url: `${orash_api_url}/api/v2/store/productsubgroup`
+                        }).done(function (data) {
+                            if (data['hasError']) { }
+                            else {
+                                $("#@Html.IdFor(x => x.SelectedSubGroupFrom)").empty();
+                                $("#@Html.IdFor(x => x.SelectedSubGroupTo)").empty();
+
+                                data['content'].forEach(function (item, index) {
+                                    var o = new Option(item['caption'], item['code']);
+                                    $("#@Html.IdFor(x => x.SelectedSubGroupFrom)").append(o);
+                                });
+
+                                data['content'].forEach(function (item, index) {
+                                    var o = new Option(item['caption'], item['code']);
+                                    $("#@Html.IdFor(x => x.SelectedSubGroupTo)").append(o);
+                                });
+                            }
+                        }).fail(function (errorThrown) { });
+                    }
+                }
+
+                else {
+                    $("#@Html.IdFor(x =>x.SelectedSubGroupFrom)").empty();
+                    $("#@Html.IdFor(x =>x.SelectedSubGroupTo)").empty();
+                    $("#@Html.IdFor(x => x.SelectedSubGroupFrom)").prop('disabled', true);
+                    $("#@Html.IdFor(x => x.SelectedSubGroupTo)").prop('disabled', true);
+                }
+            });
+
+            ///////////////////////////////////////////////////////////////////////////
+            ///4.checkbox product code
+            $("#@Html.IdFor(x => x.InstallProducts)").on('click', function (e) {
+                if ($(this).is(":checked")) {
+                    $("#@Html.IdFor(x => x.SelectedProductCodeFrom)").prop('disabled', false);
+                    $("#@Html.IdFor(x => x.SelectedProductCodeTo)").prop('disabled', false);
+
+                    var storagecode = $("#SelectedStorage").val();
+                    var MainGroupFrom = parseInt($("#SelectedMainGroupFrom").val());
+                    var MainGroupTo = parseInt($("#SelectedMainGroupTo").val());
+                    var SubGroupFrom = parseInt($("#SelectedSubGroupFrom").val());
+                    var SubGroupTo = parseInt($("#SelectedSubGroupTo").val());
+                    var CategoryFrom = parseInt($("#SelectedCategoryFrom").val());
+                    var CategoryTo = parseInt($("#SelectedCategoryTo").val());
+                    var FeeLevel = parseInt($("#SelectedOrashProductFeeLevel").val());
+
+                    if (MainGroupFrom > MainGroupTo) {
+                        var MainGroupTo = $("#SelectedMainGroupFrom").val();
+                        var MainGroupfROM = $("#SelectedMainGroupTo").val();
+                    }
+
+                    if (SubGroupFrom > SubGroupTo) {
+                        var SubGroupTo = $("#SelectedSubGroupFrom").val();
+                        var SubGroupFrom = $("#SelectedSubGroupTo").val();
+                    }
+
+                    if (CategoryFrom > CategoryTo) {
+                        var CategoryTo = $("#SelectedCategoryFrom").val();
+                        var CategoryFrom = $("#SelectedCategoryTo").val();
+                    }
+
+                    //ajax
+                    var GetproductcodeData = {
+                        "uniqueID": `${company_id}`,
+                        "data":
+                        {
+                            "xmlflag": false,
+                            "storagecode": storagecode,
+                            "frommaingroupcode": MainGroupFrom,
+                            "tomaingroupcode": MainGroupTo,
+                            "fromsecondgroupcode": SubGroupFrom,
+                            "tosecondgroupcode": SubGroupTo,
+                            "fromcategorycode": CategoryFrom,
+                            "tocategorycode": CategoryTo,
+                            "propertyflag": false,
+                            "whichprice": FeeLevel
+                        }
+                    }
+
+                    $.ajax({
+                        method: 'POST',
+                        data: JSON.stringify(GetproductcodeData),
+                        contentType: 'application/json; charset=UTF-8',
+                        url: `${orash_api_url}/api/v2/store/product`
+                    }).done(function (data) {
+                        if (data['hasError']) { }
+                        else {
+
+                            console.log('testttttttttt');
+                            $("#@Html.IdFor(x => x.SelectedProductCodeFrom)").empty();
+                            $("#@Html.IdFor(x => x.SelectedProductCodeTo)").empty();
+
+                            data['content'].forEach(function (item, index) {
+                                var o = new Option(item['goodName'], item['goodCode']);
+                                $("#@Html.IdFor(x => x.SelectedProductCodeFrom)").append(o);
+                            });
+
+                            data['content'].forEach(function (item, index) {
+                                var o = new Option(item['goodName'], item['goodCode']);
+                                $("#@Html.IdFor(x => x.SelectedProductCodeTo)").append(o);
+                            });
+                        }
+                    }).fail(function (errorThrown) { });
+                }
+
+                else {
+                    $("#SelectedProductCodeFrom").empty();
+                    $("#SelectedProductCodeTo").empty();
+                    $("#@Html.IdFor(x => x.SelectedProductCodeFrom)").prop('disabled', true);
+                    $("#@Html.IdFor(x => x.SelectedProductCodeTo)").prop('disabled', true);
+                }
+            });
+
+        });
+    });
+
+</script>
