@@ -33,6 +33,7 @@
                 <select asp-for="SelectedCompany" class="form-control" disabled></select>
             </div>
         </div>
+
         <div class="form-group row">
             <label class="col-sm-4 col-form-label text-right font-weight-bold">
                 @ILS.GetResource("TransferFeeLevel")
@@ -41,6 +42,7 @@
                 <select asp-for="SelectedOrashProductFeeLevel" asp-items="Model.OrashProductFeeLevels" class="form-control" disabled></select>
             </div>
         </div>
+
         <div class="form-group row">
             <label class="col-sm-4 col-form-label text-right font-weight-bold">
                 @ILS.GetResource("OrashStorages")
@@ -50,19 +52,18 @@
             </div>
         </div>
 
-        @*//////////////////////////////////////////from to *@
         <div class="form-group row">
-            <input class="form-check-input" asp-for="InstallProductCategories" value="InstallProductCategories" disabled />
+            <input class="form-check-input" asp-for="InstallProductCategories" disabled />
             <label class="col-sm-4 from-check-label" for="@Html.IdFor(m => m.InstallProductCategories)">
                 @ILS.GetResource("Category")
             </label>
             <label class="col-sm-1">@ILS.GetResource("From")</label>
             <div class="col-sm-3">
-                <select asp-for="SelectedCategoryFrom" asp-items="Model.OrashCategoryFrom" class="form-control" disabled></select>
+                <select data-product-option="fromCat" asp-for="SelectedCategoryFrom" asp-items="Model.OrashCategoryFrom" class="form-control" disabled></select>
             </div>
             <label class="col-sm-1">@ILS.GetResource("To")</label>
             <div class="col-sm-3">
-                <select asp-for="SelectedCategoryTo" asp-items="Model.OrashCategoryTo" class="form-control" disabled></select>
+                <select data-product-option="toCat" asp-for="SelectedCategoryTo" asp-items="Model.OrashCategoryTo" class="form-control" disabled></select>
             </div>
         </div>
 
@@ -73,11 +74,11 @@
             </label>
             <label class="col-sm-1">@ILS.GetResource("From")</label>
             <div class="col-sm-3">
-                <select asp-for="SelectedMainGroupFrom" asp-items="Model.OrashMainGroupsFrom" class="form-control" disabled></select>
+                <select data-product-option="fromGrp" asp-for="SelectedMainGroupFrom" asp-items="Model.OrashMainGroupsFrom" class="form-control" disabled></select>
             </div>
             <label class="col-sm-1">@ILS.GetResource("To")</label>
             <div class="col-sm-3">
-                <select asp-for="SelectedMainGroupTo" asp-items="Model.OrashMainGroupsTo" class="form-control" disabled></select>
+                <select data-product-option="toGrp" asp-for="SelectedMainGroupTo" asp-items="Model.OrashMainGroupsTo" class="form-control" disabled></select>
             </div>
         </div>
 
@@ -88,11 +89,11 @@
             </label>
             <label class="col-sm-1">@ILS.GetResource("From")</label>
             <div class="col-sm-3">
-                <select asp-for="SelectedSubGroupFrom" asp-items="Model.OrashSubGroupsFrom" class="form-control" disabled></select>
+                <select data-product-option="fromSGrp" asp-for="SelectedSubGroupFrom" asp-items="Model.OrashSubGroupsFrom" class="form-control" disabled></select>
             </div>
             <label class="col-sm-1">@ILS.GetResource("To")</label>
             <div class="col-sm-3">
-                <select asp-for="SelectedSubGroupTo" asp-items="Model.OrashSubGroupsTo" class="form-control" disabled></select>
+                <select data-product-option="toSGrp" asp-for="SelectedSubGroupTo" asp-items="Model.OrashSubGroupsTo" class="form-control" disabled></select>
             </div>
         </div>
 
@@ -111,36 +112,17 @@
             </div>
         </div>
 
-        @*check box*@
-        <div class="row">
-            <div class="col-md-4">
-                <div class="form-group">
-                    <div class="form-check">
-                        <input class="form-check-input" asp-for="InstallProductProperties" disabled />
-                        <label class="form-check-label" for="@Html.IdFor(m => m.InstallProductProperties)">
-                            @ILS.GetResource("TransferProductProperties")
-                        </label>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-4">
-                <div class="form-group">
-                    <div class="form-check">
-                        <input class="form-check-input" asp-for="UseOrashProductFee" disabled />
-                        <label class="form-check-label" for="@Html.IdFor(m => m.UseOrashProductFee)">
-                            @ILS.GetResource("TransferProductFees")
-                        </label>
-                    </div>
-                </div>
-            </div>
+        <div class="form-group row">
+            <input class="form-check-input" asp-for="InstallProductProperties" disabled />
+            <label class="form-check-label" for="@Html.IdFor(m => m.InstallProductProperties)">
+                @ILS.GetResource("TransferProductProperties")
+            </label>            
         </div>
-        @*check box*@
 
     </div>
 </div>
 
 <script type="text/javascript">
-
 
     $(document).ready(function () {
         let orash_api_url = '';
@@ -173,8 +155,7 @@
                     });
 
                     $("#@Html.IdFor(x => x.SelectedCompany)").prop('disabled', false);
-                    $("#@Html.IdFor(x => x.SelectedOrashProductFeeLevel)").prop('disabled', false);
-                    //$("#@Html.IdFor(x => x.SelectedStorage)").prop('disabled', false);
+                    $("#@Html.IdFor(x => x.SelectedOrashProductFeeLevel)").prop('disabled', false);                    
                 }
             }).fail(function (errorThrown) {
                 //
@@ -202,8 +183,7 @@
                     $("#@Html.IdFor(x => x.InstallProductCategories)").prop('disabled', false);
                     $("#@Html.IdFor(x => x.InstallProductMainGroups)").prop('disabled', false);
                     $("#@Html.IdFor(x => x.InstallProductProperties)").prop('disabled', false);
-                    $("#@Html.IdFor(x => x.InstallProducts)").prop('disabled', false);
-                    $("#@Html.IdFor(x => x.UseOrashProductFee)").prop('disabled', false);
+                    $("#@Html.IdFor(x => x.InstallProducts)").prop('disabled', false);                    
 
                     $("#InstallProductSubGroups").prop('checked', false);
                     $("#InstallProductMainGroups").prop('checked', false);
@@ -254,18 +234,26 @@
                     }).done(function (data) {
                         if (data['hasError']) { }
                         else {
+                            var length=0;                           
                             $("#@Html.IdFor(x => x.SelectedCategoryFrom)").empty();
                             $("#@Html.IdFor(x => x.SelectedCategoryTo)").empty();
 
                             data['content'].forEach(function (item, index) {
                                 var o = new Option(item['caption'], item['code']);
                                 $("#@Html.IdFor(x => x.SelectedCategoryFrom)").append(o);
+                                length=length+1;
                             });
 
                             data['content'].forEach(function (item, index) {
                                 var o = new Option(item['caption'], item['code']);
                                 $("#@Html.IdFor(x => x.SelectedCategoryTo)").append(o);
                             });
+
+                            if(length==0)
+                            {
+                                $("#SelectedCategoryFrom").append(`<option value=${null}>اطلاعاتی وجود ندارد.</option>`);
+                                $("#SelectedCategoryTo").append(`<option value=${null}>اطلاعاتی وجود ندارد.</option>`)
+                            }
                         }
                     }).fail(function (errorThrown) {
                         //--
@@ -302,18 +290,26 @@
                     }).done(function (data) {
                         if (data['hasError']) { }
                         else {
+                            var length=0;                       
                             $("#@Html.IdFor(x => x.SelectedMainGroupFrom)").empty();
                             $("#@Html.IdFor(x => x.SelectedMainGroupTo)").empty();
-
+                            
                             data['content'].forEach(function (item, index) {
                                 var o = new Option(item['caption'], item['code']);
                                 $("#@Html.IdFor(x => x.SelectedMainGroupFrom)").append(o);
+                                length=length+1;
                             });
 
                             data['content'].forEach(function (item, index) {
                                 var o = new Option(item['caption'], item['code']);
                                 $("#@Html.IdFor(x => x.SelectedMainGroupTo)").append(o);
                             });
+
+                            if(length == 0)
+                            {
+                                $("#SelectedMainGroupFrom").append(`<option value=${null}>اطلاعاتی برای نمایش وجود ندارد.</option>`);
+                                $("#SelectedMainGroupTo").append(`<option value=${null}>اطلاعاتی برای نمایش وجود ندارد.</option>`);
+                            }
                         }
                     }).fail(function (errorThrown) {
                         //--
@@ -345,8 +341,7 @@
                         var maingroupTo = $("#SelectedMainGroupFrom").val();
                         var maingroupFrom = $("#SelectedMainGroupTo").val();
                     }
-
-                    //check if maingroup selected can select a subgroup
+                   
                     if ((maingroupFrom != null) && (maingroupTo != null)) {
 
                         $("#@Html.IdFor(x => x.SelectedSubGroupFrom)").prop('disabled', false);
@@ -371,16 +366,24 @@
                             else {
                                 $("#@Html.IdFor(x => x.SelectedSubGroupFrom)").empty();
                                 $("#@Html.IdFor(x => x.SelectedSubGroupTo)").empty();
-
+                                var length=0;
+                                var value = null;
                                 data['content'].forEach(function (item, index) {
                                     var o = new Option(item['caption'], item['code']);
                                     $("#@Html.IdFor(x => x.SelectedSubGroupFrom)").append(o);
+                                    length=length+1;
                                 });
 
                                 data['content'].forEach(function (item, index) {
                                     var o = new Option(item['caption'], item['code']);
                                     $("#@Html.IdFor(x => x.SelectedSubGroupTo)").append(o);
                                 });
+
+                                if(length == 0)
+                                {                                    
+                                    $("#SelectedSubGroupFrom").append(`<option value=${null}>اطلاعاتی وجود ندارد.</option>`);
+                                    $("#SelectedSubGroupTo").append(`<option value=${null}>اطلاعاتی وجود ندارد.</option>`);
+                                }
                             }
                         }).fail(function (errorThrown) { });
                     }
@@ -398,6 +401,7 @@
             ///4.checkbox product code
             $("#@Html.IdFor(x => x.InstallProducts)").on('click', function (e) {
                 if ($(this).is(":checked")) {
+
                     $("#@Html.IdFor(x => x.SelectedProductCodeFrom)").prop('disabled', false);
                     $("#@Html.IdFor(x => x.SelectedProductCodeTo)").prop('disabled', false);
 
@@ -406,8 +410,8 @@
                     var MainGroupTo = parseInt($("#SelectedMainGroupTo").val());
                     var SubGroupFrom = parseInt($("#SelectedSubGroupFrom").val());
                     var SubGroupTo = parseInt($("#SelectedSubGroupTo").val());
-                    var CategoryFrom = parseInt($("#SelectedCategoryFrom").val());
-                    var CategoryTo = parseInt($("#SelectedCategoryTo").val());
+                    var CategoryFrom = $("#SelectedCategoryFrom").val();
+                    var CategoryTo = $("#SelectedCategoryTo").val();
                     var FeeLevel = parseInt($("#SelectedOrashProductFeeLevel").val());
 
                     if (MainGroupFrom > MainGroupTo) {
@@ -451,20 +455,26 @@
                     }).done(function (data) {
                         if (data['hasError']) { }
                         else {
-
-                            console.log('testttttttttt');
+                            var len = 0;
+                            var value = null;
                             $("#@Html.IdFor(x => x.SelectedProductCodeFrom)").empty();
                             $("#@Html.IdFor(x => x.SelectedProductCodeTo)").empty();
 
                             data['content'].forEach(function (item, index) {
                                 var o = new Option(item['goodName'], item['goodCode']);
                                 $("#@Html.IdFor(x => x.SelectedProductCodeFrom)").append(o);
+                                len = len + 1;
                             });
 
                             data['content'].forEach(function (item, index) {
                                 var o = new Option(item['goodName'], item['goodCode']);
                                 $("#@Html.IdFor(x => x.SelectedProductCodeTo)").append(o);
-                            });
+                            });                            
+
+                            if (len == 0) { 
+                                $("#SelectedProductCodeFrom").append(`<option value=${null}>اطلاعاتی وجود ندارد.</option>`);
+                                $("#SelectedProductCodeTo").append(`<option value=${null}>اطلاعاتی وجود ندارد.</option>`);
+                            }
                         }
                     }).fail(function (errorThrown) { });
                 }
@@ -477,7 +487,109 @@
                 }
             });
 
+           
         });
+
+        //changing of some selectbox has (data-product-option) in tag
+        $('body').on('change','[data-product-option]' , function(e){
+
+
+            var changed = $(e.target).data('productOption');
+
+            $("#InstallProducts").prop('checked', true);
+            $("#@Html.IdFor(x => x.SelectedProductCodeFrom)").prop('disabled', false);
+            $("#@Html.IdFor(x => x.SelectedProductCodeTo)").prop('disabled', false);
+
+            var storagecode = $("#SelectedStorage").val();
+            var MainGroupFrom = parseInt($("#SelectedMainGroupFrom").val());
+            var MainGroupTo = parseInt($("#SelectedMainGroupTo").val());
+            var SubGroupFrom = parseInt($("#SelectedSubGroupFrom").val());
+            var SubGroupTo = parseInt($("#SelectedSubGroupTo").val());
+            var CategoryFrom = $("#SelectedCategoryFrom").val();
+            var CategoryTo = $("#SelectedCategoryTo").val();
+            var FeeLevel = parseInt($("#SelectedOrashProductFeeLevel").val());
+            var companyID = $("#SelectedCompany").val();
+
+            if (MainGroupFrom > MainGroupTo) {
+                var MainGroupTo = $("#SelectedMainGroupFrom").val();
+                var MainGroupfROM = $("#SelectedMainGroupTo").val();
+            }
+
+            if (SubGroupFrom > SubGroupTo) {
+                var SubGroupTo = $("#SelectedSubGroupFrom").val();
+                var SubGroupFrom = $("#SelectedSubGroupTo").val();
+            }
+
+            var _CategoryFrom = parseInt($("#SelectedCategoryFrom").val());
+            var _CategoryTo = parseInt($("#SelectedCategoryTo").val());
+
+            if (_CategoryFrom > _CategoryTo) {
+                var CategoryTo = $("#SelectedCategoryFrom").val();
+                var CategoryFrom = $("#SelectedCategoryTo").val();
+            }
+
+            //ajax
+            var GetproductcodeData = {
+                "uniqueID": companyID,
+                "data":
+                {
+                    "xmlflag": false,
+                    "storagecode": storagecode,
+                    "frommaingroupcode": MainGroupFrom,
+                    "tomaingroupcode": MainGroupTo,
+                    "fromsecondgroupcode": SubGroupFrom,
+                    "tosecondgroupcode": SubGroupTo,
+                    "fromcategorycode": CategoryFrom,
+                    "tocategorycode": CategoryTo,
+                    "propertyflag": false,
+                    "whichprice": FeeLevel
+                }
+            }
+
+            $.ajax({
+                method: 'POST',
+                data: JSON.stringify(GetproductcodeData),
+                contentType: 'application/json; charset=UTF-8',
+                url: `${orash_api_url}/api/v2/store/product`
+            }).done(function (data) {
+                if (data['hasError']) { }
+                else {
+                    var len = 0;
+                    var value = null;
+                    $("#@Html.IdFor(x => x.SelectedProductCodeFrom)").empty();
+                    $("#@Html.IdFor(x => x.SelectedProductCodeTo)").empty();
+
+                    data['content'].forEach(function (item, index) {
+                        var o = new Option(item['goodName'], item['goodCode']);
+                        $("#@Html.IdFor(x => x.SelectedProductCodeFrom)").append(o);
+                        len = len + 1;
+                    });
+
+                    data['content'].forEach(function (item, index) {
+                        var o = new Option(item['goodName'], item['goodCode']);
+                        $("#@Html.IdFor(x => x.SelectedProductCodeTo)").append(o);
+                    });
+
+                    if (len == 0) {
+                        $("#SelectedProductCodeFrom").append(`<option value=${null}>اطلاعاتی وجود ندارد.</option>`);
+                        $("#SelectedProductCodeTo").append(`<option value=${null}>اطلاعاتی وجود ندارد.</option>`);
+                    }
+                }
+            }).fail(function (errorThrown) { });
+        });
+
+        //if ($('#InstallOrash').is(':checked'))
+        //{
+        //    //OrashAutomationApiURL
+        //    //SelectedCompany
+        //    //SelectedStorage
+        //    //InstallProducts
+        //    var orashurl = $('OrashAutomationApiURL').val();
+        //    var company = $('SelectedCompany').val();
+        //    var storage = $('SelectedStorage').val();
+        //    var product = $('InstallProducts').val();
+        //}
+
     });
 
 </script>
