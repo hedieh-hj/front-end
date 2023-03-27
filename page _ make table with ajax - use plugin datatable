@@ -1,0 +1,241 @@
+@using Nop.Core.ViewModels.OrderSettings;
+@model OrderStepsStructureViewModel
+
+<style>
+    table, th, td {
+        border: 1px solid #a5aab0;
+    }
+
+    th, td {
+        padding: 10px 10px;
+        text-align: center;
+    }
+
+    .row {
+        margin-left: 15px;
+        /*margin-right: 15px;*/
+    }
+
+    .column {
+        float: left;
+        /*width: 50%;*/
+        padding: 15px;
+    }
+
+    .button {
+        padding: 5px;
+    }
+
+    a {
+        padding: 0px 10px;
+    }
+
+    .main {
+        padding: 10px 50px;
+    }
+
+</style>
+
+
+
+<div class="content-header clearfix">
+    <h2 class="float-left">
+        تنظیمات سفارش
+        <small>
+            <i class="fas fa-arrow-circle-left"></i>
+            <a asp-action="Index" asp-controller="Home">بازگشت</a>
+        </small>
+    </h2>
+    <div class="float-right">
+        <a asp-action="CreateOrderStep" class="btn btn-primary">
+            <i class="fas fa-plus-square"></i>
+            اضافه کردن مرحله جدید
+        </a>
+
+        <a asp-action="CreateOrderStepOwner" class="btn btn-primary">
+            <i class="fas fa-plus-square"></i>
+            اضافه کردن جزییات مراحل
+        </a>
+    </div>
+</div>
+
+<div class="main">
+    <hr />
+    <h4> مراحل سفارش</h4>
+    <div class="card card-default">
+        <div class="card-body">
+
+            @{
+                var gridModel = new DataTablesModel
+            {
+                Name = "OrderTable",
+                UrlRead = new DataUrl("GetOrderList", "OrderSteps", null),
+                Length = 100,
+                LengthMenu = "50",
+                Filters = new List<FilterParameter>
+            {
+            new FilterParameter(nameof(Model.id)),
+            new FilterParameter(nameof(Model.LevelName)),
+            new FilterParameter(nameof(Model.LevelOrder)),
+            }
+            };
+                gridModel.ColumnCollection.Add(new ColumnProperty(nameof(OrderStepsStructureViewModel.id))
+            {
+                Title = "شناسه",
+                Width = "50",
+                ClassName = NopColumnClassDefaults.CenterAll,
+            });
+
+                gridModel.ColumnCollection.Add(new ColumnProperty(nameof(OrderStepsStructureViewModel.LevelName))
+            {
+                Title = "عنوان مرحله",
+                Width = "100",
+                ClassName = NopColumnClassDefaults.CenterAll,
+            });
+
+                gridModel.ColumnCollection.Add(new ColumnProperty(nameof(OrderStepsStructureViewModel.LevelOrder))
+            {
+                Title = "الویت مرحله",
+                Width = "50",
+                ClassName = NopColumnClassDefaults.CenterAll,
+
+            });
+                gridModel.ColumnCollection.Add(new ColumnProperty(nameof(OrderStepsStructureViewModel.LevelOrder))
+            {
+                Title = "عملیات",
+                Width = "75",
+                ClassName = NopColumnClassDefaults.CenterAll,
+                //Render = new RenderBoolean()
+            });
+
+            }
+            @await Html.PartialAsync("Table", gridModel)
+        </div>
+    </div>
+
+    <h4>جزییات مراحل </h4>
+    <div class="card card-default">
+        <div class="card-body">
+
+            @{
+                var _gridModel = new DataTablesModel
+            {
+                Name = "OrderStepsOwnerTable",
+                UrlRead = new DataUrl("GetOrderStepsOwnerList", "OrderSteps", null),
+                //SearchButtonId = "search-customers",
+                Length = 100,
+                LengthMenu = "50",
+                Filters = new List<FilterParameter>
+            {
+            new FilterParameter(nameof(Model.id)),
+            new FilterParameter(nameof(Model.LevelName)),
+            new FilterParameter(nameof(Model.UserName)),
+            new FilterParameter(nameof(Model.UserOrder)),
+
+            }
+            };
+                _gridModel.ColumnCollection.Add(new ColumnProperty(nameof(OrderStepsStructureViewModel.id))
+            {
+                Title = "شناسه",
+                Width = "50",
+                ClassName = NopColumnClassDefaults.CenterAll,
+            });
+
+                _gridModel.ColumnCollection.Add(new ColumnProperty(nameof(OrderStepsStructureViewModel.LevelName))
+            {
+                Title = "عنوان مرحله",
+                Width = "100",
+                ClassName = NopColumnClassDefaults.CenterAll,
+            });
+
+                _gridModel.ColumnCollection.Add(new ColumnProperty(nameof(OrderStepsStructureViewModel.UserName))
+            {
+                Title = "نام کاربر",
+                Width = "150",
+                ClassName = NopColumnClassDefaults.CenterAll,
+
+            });
+                _gridModel.ColumnCollection.Add(new ColumnProperty(nameof(OrderStepsStructureViewModel.UserOrder))
+            {
+                Title = "الویت کاربر",
+                Width = "50",
+                ClassName = NopColumnClassDefaults.CenterAll,
+
+            });
+                _gridModel.ColumnCollection.Add(new ColumnProperty("action")
+            {
+                Title = "عملیات",
+                Width = "75",
+                ClassName = NopColumnClassDefaults.CenterAll,
+                //Render = new RenderBoolean()
+            });
+
+            }
+            @await Html.PartialAsync("Table", _gridModel)
+        </div>
+    </div>
+
+</div>
+<hr />
+
+
+
+<script type="text/javascript">
+
+    $(document).ready(function () {
+
+        ///////////////////////////////////////////////////////////
+        // get orders data
+        $.ajax({
+            method: 'GET',
+            url: '/admin/ordersteps/GetOrderList',
+        }).done(function (data) {
+            if (data['hasError']) { }
+            else {
+                var tableBody = $('#OrderTable tbody');
+                tableBody.empty();
+
+                data.forEach(function (item) {
+                    var newRow = '<tr>' +
+                        '<td>' + item.Id + '</td>' +
+                        '<td>' + item.LevelName + '</td>' +
+                        '<td>' + item.LevelOrder + '</td>' +
+                        `<td><a href="/admin/ordersteps/EditOrderStepById/${item.Id}" >` + 'ویرایش' + '</a>' + '|' +
+                        `<a href="/admin/ordersteps/DeleteOrderStep/${item.Id}" OnClick="return confirm('آیا از حذف اطلاعات اطمینان دارید؟');">` + 'حذف' + '</a>' + '</td > ' +
+                        '</tr>';
+                    tableBody.append(newRow);
+                })
+            }
+        }).fail(function (errorThrown) { });
+
+        ///////////////////////////////////////////////////////////
+        // get order step owner
+        $.ajax({
+            method: 'GET',
+            url: '/admin/ordersteps/GetOrderStepsOwnerList',
+        }).done(function (data) {
+            if (data['hasError']) { }
+            else {
+                var tableBody = $('#OrderStepsOwnerTable tbody');
+                tableBody.empty();
+
+                data.forEach(function (item) {
+                    var newRow = '<tr>' +
+                        '<td>' + item.id + '</td>' +
+                        '<td>' + item.LevelName + '</td>' +
+                        '<td>' + item.UserName + '</td>' +
+                        '<td>' + item.UserOrder + '</td>' +
+                        `<td><a href="/admin/ordersteps/EditOrderStepOwnerById/${item.id}" >` + 'ویرایش' + '</a>' + '|' +
+                        `<a href="/admin/ordersteps/DeleteOrderStepOwner/${item.id}" OnClick="return confirm('آیا از حذف اطلاعات اطمینان دارید؟');">` + 'حذف' + '</a>' + '</td > ' +
+                        '</tr>';
+                    tableBody.append(newRow);
+                })
+            }
+        }).fail(function (errorThrown) { });
+
+    });
+</script>
+
+
+
+
