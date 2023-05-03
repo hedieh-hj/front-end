@@ -1,0 +1,154 @@
+@using Nop.Core.ViewModels.OrderSettings;
+@model OrderStepsStructureViewModel
+
+
+<form asp-controller="OrderSteps" asp-action="EditOrderStepsOwner" method="post">
+    <div class="content-header clearfix">
+        <h2 class="float-left">
+            ویرایش جزییات مرحله
+            <small>
+                <i class="fas fa-arrow-circle-left"></i>
+                <a asp-action="Ordersetting">بازگشت</a>
+            </small>
+        </h2>
+        <div class="float-right">
+            <button type="submit" name="save" class="btn btn-primary">
+                <i class="far fa-save"></i>
+                @T("Admin.Common.Save")
+            </button>
+        </div>
+    </div>
+    <div class="card-body">
+
+        <div class="form-group row">
+            <div class="col-md-3">
+                <nop-label asp-for="Id" />                
+            </div>
+            <div class="col-md-9">
+                @Html.TextBoxFor(m=>m.Id, new {@class = "form-control text-box single-line " ,@readonly="readonly"  })
+            </div>
+        </div>
+
+        <div class="form-group row">
+            <div class="col-md-3">
+                <nop-label asp-for="LevelName" />
+            </div>
+            <div class="col-md-9">
+                <select class="form-control" asp-for="SelectedLevelNames"></select>
+            </div>
+        </div>
+
+        <div class="form-group row">
+            <div class="col-md-3">
+                <nop-label asp-for="UserName" />
+            </div>
+            <div class="col-md-9">
+                <select class="form-control" asp-for="SelectedUsername"></select>
+            </div>
+        </div>
+
+        <div class="form-group row">
+            <div class="col-md-3">
+                <nop-label asp-for="UserOrder" />
+            </div>
+            <div class="col-md-9">
+                <select class="form-control" asp-for="SelectedUserOrders"></select>
+            </div>
+        </div>
+    </div>
+</form>
+
+
+<script type="text/javascript">
+
+    $(document).ready(function () {
+
+        //////////////////////////////////////////////////////////
+        //selectbox levelname
+        $.ajax({
+            method: 'GET',
+            url: '/admin/ordersteps/GetOrderList'
+        }).done(function (data) {
+            if (data['hasError']) { }
+            else {
+                $("#SelectedLevelNames").empty();
+                data.forEach(function (item, index) {
+                    var o = new Option(item['LevelName'], item['Id']);
+                    $("#SelectedLevelNames").append(o);
+                    
+                    if (item['Id'] == @Model.LevelId) 
+                    {
+                        $("#SelectedLevelNames").val(@Model.LevelId);
+                    }
+                });
+                //$("#SelectedLevelNames").append(`<option value=${@Model.LevelId} selected>@Model.LevelName</option>`);                
+                $("#SelectedLevelNames").trigger('change');
+            }
+        }).fail(function (errorThrown) { });
+
+        ///////////////////////////////////////////////////////////
+        //selectbox usernames
+        $.ajax({
+            method: 'GET',
+            url: '/admin/ordersteps/GetUsers',
+        }).done(function (data) {
+            if (data['hasError']) { }
+            else {
+                $("#SelectedUsername").empty();
+                data.forEach(function (item, index) {
+                    var o = new Option(item['FirstName'] + ' ' + item['LastName'], item['Id']);
+                    $("#SelectedUsername").append(o);
+                    
+                    if (item['Id'] == @Model.UserId)
+                    {
+                        $("#SelectedUsername").val(@Model.UserId);
+                    }
+                });                
+                $("#SelectedLevelNames").trigger('change');
+            }
+        }).fail(function (errorThrown) { });
+
+        ///////////////////////////////////////////////////////
+        //get user order         
+
+        $("#SelectedLevelNames").on('change', function (e) {
+            GetUserOrder();
+        });
+
+        $("#SelectedLevelNames").trigger('change');
+        
+        function GetUserOrder() {    
+            var selectedlevelname = $("#SelectedLevelNames").val();
+            $.ajax({
+                url: `/admin/ordersteps/GetUserOrderNumbers`
+            }).done(function (data) {
+                if (data['hasError']) { }
+                else {
+
+                    $('#SelectedUserOrders').empty();
+                    for (let i = 1; i <= 200; i++) {
+                        $('#SelectedUserOrders').append(`<option value="${i}">${i}</option>`);
+                    }
+
+                    data.forEach(function (item) {
+                        if (item.OrderStepId == selectedlevelname) {
+                            if(@Model.UserOrder != item.UserOrder || @Model.Id != item.Id)
+                            {
+                                $(`#SelectedUserOrders option[value="${item.UserOrder}"]`).remove();                                                        
+                            }
+                        }
+                        if (selectedlevelname == @Model.LevelId)
+                        {
+                            $("#SelectedUserOrders").val(@Model.UserOrder);
+                        }
+                        
+                    });                    
+                }
+            }).fail(function (errorThrown) { });
+        }
+        
+
+    });
+</script>
+
+
