@@ -1,0 +1,100 @@
+--------------------------------------
+add atribute to a tag with js in html :
+--------------------------------------
+
+<html>
+<style>
+
+.democlass {
+  color: red;
+}
+
+.testclass {
+	color:green;
+	font-size:58px;
+}
+
+
+</style>
+
+<body>
+<h1 id="myH1">The Element Object</h1>
+<h2>The setAttribute() Method</h2>
+
+<p>Click "Add Class" to add a class attribute to the h1 element:</p>
+
+<button onclick="myFunction()">Add Class</button>
+<button onclick = "test()"> changing </button>
+
+<script>
+function myFunction() {
+  document.getElementById("myH1").setAttribute("class", "democlass"); 
+}
+
+function test(){
+	document.getElementById("myH1").setAttribute("class", "testclass");
+}
+</script>
+
+</body>
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////////
+--------------------------------------
+add atribute to a tag with js in js file :
+--------------------------------------
+
+document.getElementById("myH1").getAttribute("class").replace("bye","NO");
+should be
+
+var change = document.getElementById("myH1").getAttribute("class").replace("bye","NO");
+document.getElementById("myH1").setAttribute("class",change);
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+You cannot set a style like this:
+
+element.style = "color:red";
+You must use a CSS property like this:
+
+element.style.backgroundColor = "red";  
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////////
+--------------------------------------
+attribute in select tag in js :
+-------------------------------------- 
+
+
+if (selectedLockList.length != 0 ) //lock
+    {
+        $("input[name=check][value='Lock']").prop("checked", true);
+        $('select[name="Levels"]').attr('disabled', true);   
+    }
+
+    else //level
+    { 
+        $("input[name=check][value='Level']").prop("checked", true);
+        $('select[name="LockList"]').attr('disabled', true);
+    }
+
+
+    $('input[name="check"]').on('change', function () {
+
+        if (this.value != "Lock") { //level
+            $('#LockList').val(null).trigger('change');
+            $('select[name="Levels"]').attr('enabled', this.value != "Lock")
+        }
+
+        else { //lock
+            $('#Levels').val(null).trigger('change');
+            $('select[name="LockList"]').attr('enabled', this.value != "Levels")
+        }
+
+        $('select[name="LockList"]').attr('disabled', this.value != "Lock")
+        $('select[name="Levels"]').attr('disabled', this.value != "Level")
+    });
+//////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+
+
+</html>
